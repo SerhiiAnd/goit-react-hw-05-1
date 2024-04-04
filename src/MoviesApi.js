@@ -1,23 +1,31 @@
 import axios from "axios";
 
-const url = "https://api.themoviedb.org/3";
+const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = "8adc8d01e7de70ca25d1593f89dedeb0";
 
 const options = {
-  params: { language: "en-US" },
+  params: { language: "en-US", api_key: API_KEY },
   include_adult: false,
   headers: {
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWY1NzY2MTg5MTg0ZDAyMTc4ZDQ1YTA4YTY0MjdjOSIsInN1YiI6IjY1ZWRmN2M3YTliOWE0MDE2NGQ1OGU3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fGU9I9jYSggrc10jKyE1rX9L6Klj1YuobKvmS5ya-o8",
+      "TOKIEN eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YWRjOGQwMWU3ZGU3MGNhMjVkMTU5M2Y4OWRlZGViMCIsInN1YiI6IjY2MGM0MDBjMGI1ZmQ2MDE2MjM2ZWE3YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WZ-cxIGyN3rrojnPlrG3qTiKlL0YF1f---Ss4HFW1WQ",
   },
   accept: "application/json",
 };
 
-axios.defaults.baseURL = url;
+axios.defaults.baseURL = BASE_URL;
 
 export async function fetchData() {
-  const response = await axios.get("trending/movie/day", options);
-
-  return response.data;
+  try {
+    const response = await axios.get("trending/movie/day", options);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error("Failed to fetch data");
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 export async function fetchMovieData(movieId) {

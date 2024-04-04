@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../../MoviesApi";
 import MovieList from "../../components/MovieList/MovieList";
 import Error from "../../components/Error/Error";
+import css from "./Home.module.css";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -22,8 +23,8 @@ const Home = () => {
   }, []);
 
   return (
-    <main>
-      <h1>Trending today</h1>
+    <main className={css.container}>
+      <h1 className={css.title}>Trending today</h1>
       {error && <Error />}
       {data && <MovieList data={data} />}
     </main>

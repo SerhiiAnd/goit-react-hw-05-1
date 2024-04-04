@@ -3,18 +3,20 @@
   padding: 16px;
   gap: 8px;
   margin-bottom: 8px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(243, 114, 28);
+  background-color: rgba(77, 72, 69, 0.671);
+  min-width: 100lh;
 }
 
 .navLink {
-  font-size: 18px;
-  color: black;
+  font-size: 26px;
+  color: rgb(247, 123, 41);
   text-decoration: none;
 }
 
 .navLink:hover,
 .navLink:focus,
 .navLink.active {
-  color: crimson;
+  color: rgb(233, 129, 10);
   text-decoration: underline;
 }

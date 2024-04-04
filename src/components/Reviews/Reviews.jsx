@@ -1,22 +1,45 @@
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchReviews } from "../../MoviesApi";
 import css from "./Reviews.module.css";
 
-const MovieList = ({ data }) => {
-  const location = useLocation();
+export default function Reviews() {
+  const [movieReviews, setMovieReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    async function getMovieReviews() {
+      try {
+        setLoading(true);
+        const data = await fetchReviews(movieId);
+        setMovieReviews(data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getMovieReviews();
+  }, [movieId]);
 
   return (
-    <ul className={css.list}>
-      {data.map((el) => {
-        return (
-          <li key={el.id} className={css.item}>
-            <Link to={`/movies/${el.id}`} state={location}>
-              {el.title}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+    <div>
+      {loading && <h3 className={css.load}>Loading...</h3>}
 
-export default MovieList;
+      {movieReviews.length === 0 ? (
+        <p className={css.noReviews}>No reviews available</p>
+      ) : (
+        <ul className={css.list}>
+          {movieReviews.map((review) => (
+            <li className={css.item} key={review.id}>
+              <h2 className={css.name}>{review && review.author}</h2>
+              <p className={css.p}>{review && review.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}

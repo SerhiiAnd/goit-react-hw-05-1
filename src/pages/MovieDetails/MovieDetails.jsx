@@ -1,13 +1,10 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
+  Link,NavLink,Outlet,useLocation,useParams,
 } from "react-router-dom";
 import { fetchMovieData } from "../../MoviesApi";
 import Loader from "react-js-loader";
+import css from "./MovieDetails.module.css";
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -37,30 +34,40 @@ const MovieDetails = () => {
   const showGenres = () =>
     movie.genres.reduce((acc, el) => (acc += ` ${el.name}`), "");
 
-  if (!movie) return;
+  if (!movie) return null;
 
   return (
-    <>
-      <button>
-        <Link to={backLinkHref.current}>Go back</Link>
-      </button>
-
-      <div>
-        {isLoading && <div>Loading...</div>}
-        {error && <div>Oops something went wrong! Try reload the page</div>}
+    <div className={css.container}>
+      <div className={css.posterContainer}>
+        {isLoading && <Loader />}
+        {error && (
+          <div className={css.error}>
+            Oops something went wrong! Try reloading the page
+          </div>
+        )}
         {movie.poster_path && (
           <img
+            className={css.poster}
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={`${movie.title} poster`}
           />
         )}
+      </div>
+
+      <div className={css.detailsContainer}>
+        <button className={css.goBackBtn}>
+          <Link to={backLinkHref.current}>Go back</Link>
+        </button>
+
         <div>
           <h1>{movie.title}</h1>
           <p>User Score: {parseInt(movie.vote_average * 10)}%</p>
           <h2>
             <b>Overview</b>
           </h2>
-          <p>{movie.overview ? movie.overview : "There are no overview"}</p>
+          <p>
+            {movie.overview ? movie.overview : "There is no overview available"}
+          </p>
           <h3>
             <b>Genres</b>
           </h3>
@@ -69,14 +76,19 @@ const MovieDetails = () => {
       </div>
 
       <hr />
+
       <p>Additional information</p>
 
-      <ul>
+      <ul className={css.navLinks}>
         <li>
-          <NavLink to="cast">Cast</NavLink>
+          <NavLink to="cast" className={css.navLink}>
+            Cast
+          </NavLink>
         </li>
         <li>
-          <NavLink to="reviews">Reviews</NavLink>
+          <NavLink to="reviews" className={css.navLink}>
+            Reviews
+          </NavLink>
         </li>
       </ul>
 
@@ -85,7 +97,7 @@ const MovieDetails = () => {
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </>
+    </div>
   );
 };
 
