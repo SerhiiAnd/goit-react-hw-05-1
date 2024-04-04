@@ -1,5 +1,11 @@
+import "./Error.module.css";
+
 const Error = () => {
-  return <div>Oops! Something went wrong, try reload the page...</div>;
+  return (
+    <div className="errorText">
+      Oops! Something went wrong, try reloading the page...
+    </div>
+  );
 };
 
 export default Error;
