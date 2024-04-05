@@ -3,11 +3,15 @@ import { lazy, Suspense } from "react";
 import Loader from "./components/Loader/Loader";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
-const Home = lazy(() => import("./pages/Home/Home"));
-const Movies = lazy(() => import("./pages/Movies/Movies"));
-const MovieDetails = lazy(() => import("./pages/MovieDetails/MovieDetails"));
-const Cast = lazy(() => import("./components/Cast/Cast"));
-const Reviews = lazy(() => import("./components/Reviews/Reviews"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() =>
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
+);
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews")
+);
 const Navigation = lazy(() => import("./components/Navigation/Navigation"));
 
 function App() {
@@ -17,11 +21,11 @@ function App() {
         <Navigation />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

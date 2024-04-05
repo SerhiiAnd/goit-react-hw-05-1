@@ -1,12 +1,16 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
-  Link,NavLink,Outlet,useLocation,useParams,
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
 } from "react-router-dom";
 import { fetchMovieData } from "../../MoviesApi";
 import Loader from "react-js-loader";
-import css from "./MovieDetails.module.css";
+import css from "./MovieDetailsPage.module.css";
 
-const MovieDetails = () => {
+const MovieDetailsPage = () => {
   const location = useLocation();
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,4 +105,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieDetailsPage;

@@ -5,9 +5,9 @@ import { useSearchParams } from "react-router-dom";
 import MovieList from "../../components/MovieList/MovieList";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
-import css from "./Movies.module.css";
+import css from "./MoviesPage.module.css";
 
-const Movies = () => {
+const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -73,4 +73,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MoviesPage;

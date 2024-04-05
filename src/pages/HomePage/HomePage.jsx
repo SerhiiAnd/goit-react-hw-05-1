@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../../MoviesApi";
 import MovieList from "../../components/MovieList/MovieList";
 import Error from "../../components/Error/Error";
-import css from "./Home.module.css";
+import css from "./HomePage.module.css";
 
-const Home = () => {
+const HomePage = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
@@ -31,4 +31,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchCast } from "../../MoviesApi";
 import { useParams } from "react-router-dom";
-import css from "./Cast.module.css";
+import css from "./MovieCast.module.css";
 
-export default function Cast() {
+export default function MovieCast() {
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(false);
 

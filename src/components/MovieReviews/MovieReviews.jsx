@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchReviews } from "../../MoviesApi";
-import css from "./Reviews.module.css";
+import css from "./MovieReviews.module.css";
 
-export default function Reviews() {
+export default function MovieReviews() {
   const [movieReviews, setMovieReviews] = useState([]);
   const [loading, setLoading] = useState(false);
 
